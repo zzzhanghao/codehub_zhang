@@ -12,3 +12,9 @@ class Demo{
 
 const {sing} = new Demo()
 sing()
+
+function a (name){
+  this.name = name
+}
+
+
