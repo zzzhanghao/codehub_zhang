@@ -13,7 +13,7 @@ class UserService{
     const statement = "SELECT * FROM users WHERE name= ?;"
     const result = await connectionn.execute(statement,[name])
     return result[0]
-
+    
   }
 
 }

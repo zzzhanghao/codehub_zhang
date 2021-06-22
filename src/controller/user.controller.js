@@ -9,7 +9,7 @@ class UserController{
     const result = await service.create(user)
     //返回数据
 
-    ctx.body = result
+    ctx.body = result 
 
   }
 }

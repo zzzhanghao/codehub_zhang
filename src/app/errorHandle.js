@@ -12,11 +12,18 @@ const errorHandle = (error,ctx) => {
       status = 409
       message = '用户名已存在'
       break
+    case errorType.USER_IS_NOTE_EXISTS :
+      status = 400
+      message = '用户名不存在'
+    break
+    case errorType.PASSWORD_IS_INCORRECT :
+      status = 400
+      message = '用户密码错误'
+    break
     default:
       status: 404
       message: 'NOT FOUND'
   }
-  console.log(error.message);
   ctx.status = status
   ctx.body = message     
 
