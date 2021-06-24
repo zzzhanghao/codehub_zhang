@@ -1,20 +1,6 @@
 
+var a = 'asd da '
 
-class Demo{
-  constructor(name,age){
-    this.name  = name;
-    this.age = age;
-  }
-  sing(){
-    console.log('我爱唱歌');
-  }
-}
+var b = a.replace("asd ",'uuuu')
 
-const {sing} = new Demo()
-sing()
-
-function a (name){
-  this.name = name
-}
-
-
+console.log(b);

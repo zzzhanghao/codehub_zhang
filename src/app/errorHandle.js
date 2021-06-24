@@ -20,6 +20,11 @@ const errorHandle = (error,ctx) => {
       status = 400
       message = '用户密码错误'
     break
+    //Unauthorized 请求要求用户的身份认证 
+    case errorType.NO_AUTHORITY :
+      status = 401
+      message = '用户没有权限'
+    break
     default:
       status: 404
       message: 'NOT FOUND'

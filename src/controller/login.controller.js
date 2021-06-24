@@ -1,8 +1,21 @@
-class LoginControlller{
+const jwt = require('jsonwebtoken')
 
-  login(ctx,next){
-    const {name} = ctx.request.body
-    ctx.response.body = `恭喜${name}登录成功`
+//这里就暂时使用 对称加密的方式
+const secretKey = 'a23dd'
+
+class LoginControlller{
+  async login(ctx,next){
+    const {id,name} = ctx.request.body
+    const token = jwt.sign({id,name},secretKey,{expiresIn: 100})
+    ctx.body = {
+      id,
+      name,
+      token
+    }
+  }
+
+  async success(ctx,next){
+    ctx.response.body = '恭喜测试成功'
   }
 }
 
