@@ -5,8 +5,8 @@ const secretKey = 'a23dd'
 
 class LoginControlller{
   async login(ctx,next){
-    const {id,name} = ctx.request.body
-    const token = jwt.sign({id,name},secretKey,{expiresIn: 100})
+    const {id,name} = ctx.user
+    const token = jwt.sign({id,name},secretKey,{expiresIn: 3000})
     ctx.body = {
       id,
       name,
