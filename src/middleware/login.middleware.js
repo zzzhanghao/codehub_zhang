@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken')
-
 const errorType = require('../constants/error-types')
 const service = require('../service/user.service')
 const md5password = require('../utils/password-handle')
@@ -41,8 +40,14 @@ const verifyLogin = async (ctx,next) => {
 const verifyAuth = async (ctx, next) => {
   console.log('验证授权的中间件');
   const authorization = ctx.headers.authorization
+
+  //如果 headers里面都没有携带这个 authorization这个字段，那么就不应该走下面的验证流程
+  if(!authorization){
+    const error = new Error(errorType.NO_AUTHORITY)
+    return ctx.app.emit('error',error,ctx)
+  }
+
   const token = authorization.replace("Bearer ","")
-  console.log(token);
   try{
     const result = jwt.verify(token,secretKey)
     console.log(result);

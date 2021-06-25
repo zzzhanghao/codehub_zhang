@@ -12,7 +12,7 @@ class LoginControlller{
       name,
       token
     }
-  }
+  } 
 
   async success(ctx,next){
     ctx.response.body = '恭喜测试成功'
@@ -20,3 +20,4 @@ class LoginControlller{
 }
 
 module.exports = new LoginControlller()
+
