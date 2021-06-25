@@ -14,6 +14,13 @@ class MomentController{
     ctx.body = result
 
   }
+  async detail(ctx,next){
+    //1、获取数据
+    const momentId = ctx.params.momentId 
+    //2、根据这个数据去数据库查询
+    const result = await MomentService.getMomentById(momentId)
+    ctx.body = result
+  }
 }
 
 module.exports = new MomentController()
