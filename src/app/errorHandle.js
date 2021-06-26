@@ -25,6 +25,10 @@ const errorHandle = (error,ctx) => {
       status = 401
       message = '用户没有权限'
     break
+    case errorType.NO_PERMISSION :
+      status = 401
+      message = '用户没有权限'
+    break
     default:
       status: 404
       message: 'NOT FOUND'

@@ -6,10 +6,12 @@ const USER_ALREADY_EXISTS = 'user_already_exists'
 const USER_IS_NOTE_EXISTS = 'user_is_not_exists'
 const PASSWORD_IS_INCORRECT = 'password_is_incorrect'
 const NO_AUTHORITY = 'no_authority'
+const NO_PERMISSION = 'no_permission'
 module.exports = {
   NAME_OR_PASSWORD_IS_REQUIRED,
   USER_ALREADY_EXISTS,
   USER_IS_NOTE_EXISTS,
   PASSWORD_IS_INCORRECT,
-  NO_AUTHORITY
+  NO_AUTHORITY,
+  NO_PERMISSION
 }

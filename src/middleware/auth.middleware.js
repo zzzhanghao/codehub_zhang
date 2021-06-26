@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const errorType = require('../constants/error-types')
+const {checkMoment} = require('../service/auth.service')
 const service = require('../service/user.service')
 const md5password = require('../utils/password-handle')
 
@@ -50,7 +51,6 @@ const verifyAuth = async (ctx, next) => {
   const token = authorization.replace("Bearer ","")
   try{
     const result = jwt.verify(token,secretKey)
-    console.log(result);
     ctx.user = result
   }catch(err){
     const error = new Error(errorType.NO_AUTHORITY)
@@ -60,7 +60,28 @@ const verifyAuth = async (ctx, next) => {
 }
 
 
+//验证权限
+const verifyPermission = async (ctx, next) => {
+  console.log('验证权限的中间件~');
+  //1、获取数据
+  const {momentId} = ctx.params
+  const {id} = ctx.user
+  //2、查询是否具有权限
+  const result = await checkMoment(momentId,id)
+
+  if(!result){
+    const error = new Error(errorType.NO_PERMISSION)
+    return ctx.app.emit('error',error,ctx)
+  }else{
+    ctx.body = result
+  }
+  await next()
+}
+
+
 module.exports = {
   verifyLogin,
-  verifyAuth
+  verifyAuth,
+  verifyPermission
+
 }

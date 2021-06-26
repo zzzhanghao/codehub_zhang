@@ -27,6 +27,13 @@ class MomentController{
     ctx.body = result
 
   }
+  async modifiy(ctx,next){
+    const momentId = ctx.params.momentId
+    const content = ctx.request.body.content
+    const result = await MomentService.modifyMoment(momentId, content)
+    ctx.body = result
+    console.log('修改内容成功' + momentId + content);
+  }
 }
 
 module.exports = new MomentController()
