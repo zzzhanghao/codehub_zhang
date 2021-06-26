@@ -18,6 +18,18 @@ class MomentService{
     return result[0]
 
   }
+  async getMulMoment(offset,count){
+    const statement = `
+    SELECT 
+    m.id id,m.content content,m.createAt creatTime,m.updateAt updateTime,
+    JSON_OBJECT('id',u.id,'name',u.name) user
+    FROM moment m
+    LEFT JOIN users u ON m.user_id = u.id
+    LIMIT ?,?;
+    `
+    const result = await connection.execute(statement,[offset,count])
+    return result[0]
+  }
 }
 
 

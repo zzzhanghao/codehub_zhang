@@ -21,6 +21,12 @@ class MomentController{
     const result = await MomentService.getMomentById(momentId)
     ctx.body = result
   }
+  async muldetail(ctx,next){
+    const {offset,count} = ctx.query
+    const result = await MomentService.getMulMoment(offset,count)
+    ctx.body = result
+
+  }
 }
 
 module.exports = new MomentController()
