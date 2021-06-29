@@ -62,21 +62,29 @@ const verifyAuth = async (ctx, next) => {
 
 //验证权限
 const verifyPermission = async (ctx, next) => {
-  console.log('验证权限的中间件~');
-  //1、获取数据
-  const {momentId} = ctx.params
-  const {id} = ctx.user
-  //2、查询是否具有权限
-  const result = await checkMoment(momentId,id)
+    console.log('验证权限的中间件~');
+    
+      //获取的是 从params里面截取的 数据库名字
+    const [key] = Object.keys(ctx.params)
+    const tableName = key.replace('Id','')
+    //1、获取数据
+    const resourceId = ctx.params[key]
+    const {id} = ctx.user
+    //2、查询是否具有权限
 
-  if(!result){
-    const error = new Error(errorType.NO_PERMISSION)
-    return ctx.app.emit('error',error,ctx)
-  }else{
-    ctx.body = result
+    const result = await checkMoment(resourceId, id, tableName)
+
+    if(!result){
+      const error = new Error(errorType.NO_PERMISSION)
+      return ctx.app.emit('error',error,ctx)
+    }else{
+      ctx.body = result
+    }
+    await next()
   }
-  await next()
-}
+
+
+
 
 
 module.exports = {
