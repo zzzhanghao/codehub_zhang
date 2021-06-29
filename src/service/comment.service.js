@@ -20,6 +20,11 @@ class Commentservice{
     return result[0]
   }
 
+  async remove(commentId){
+    const statement = `DELETE FROM comment WHERE id = ?`
+    const result = await connection.execute(statement,[commentId])
+    return result[0]
+  }
 }
 
 
